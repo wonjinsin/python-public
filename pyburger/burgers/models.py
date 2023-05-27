@@ -5,3 +5,6 @@ class Burger(models.Model):
     name = models.CharField(max_length=20)
     price = models.IntegerField(default=0)
     calories = models.IntegerField(max_length=20)
+
+    def __str__(self):
+        return self.name

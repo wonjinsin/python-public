@@ -1,0 +1,15 @@
+<html>
+  <body>
+    <h1>burger의 햄버거 검색화면 입니다.</h1>
+    <div>
+      <form method="GET">
+        <input type="text" name="keyword" />
+        <button type="submit">검색</button>
+      </form>
+    </div>
+    <div>
+      {% for burger in burgers %} {{ burger.name }} (가격: {{ burger.price }}원 칼로리:
+      {{burger.calories}}kcal) {% endfor %}
+    </div>
+  </body>
+</html>
