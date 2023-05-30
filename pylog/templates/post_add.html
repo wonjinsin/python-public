@@ -1,0 +1,27 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Post add</h1>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div>
+        <label>제목</label>
+        <input name="title" type="text" />
+      </div>
+      <div>
+        <label>내용</label>
+        <textarea name="content"></textarea>
+      </div>
+      <div>
+        <label>썸네일</label>
+        <input name="thumbnail" type="file" />
+      </div>
+      <button type="submit">작성</button>
+    </form>
+  </body>
+</html>
