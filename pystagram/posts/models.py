@@ -9,6 +9,9 @@ class Post(models.Model):
     )
     content = models.TextField("내용")
     created = models.DateTimeField("생성일시", auto_now_add=True)
+    # 아래에 있는  class 불러오는게 불가능해서, 문자열로
+    tags = models.ManyToManyField(
+        "posts.HashTag", verbose_name="해시태그 목록", blank=True)
 
 
 class PostImage(models.Model):
@@ -30,3 +33,7 @@ class Comment(models.Model):
                              on_delete=models.CASCADE)
     content = models.TextField("내용")
     created = models.DateTimeField("생성일시", auto_now_add=True)
+
+
+class HashTag(models.Model):
+    name = models.CharField("태그명", max_length=50)
