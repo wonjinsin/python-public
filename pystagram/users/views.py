@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from users.forms import LoginForm, SignupForm
+from users.models import User
 
 
 def login_view(request):
@@ -47,3 +48,28 @@ def signup(request):
     form = SignupForm()
     context = {'form': form}
     return render(request, 'users/signup.html', context)
+
+
+def profile(request, user_id):
+    user = User.objects.get(id=user_id)
+    # followers
+    user.followers.all()
+
+    # relations
+    user.follower_relationships.all()
+
+    return render(request, 'users/profile.html',)
+
+
+def followers(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    relationships = user.follower_relationships.all()
+    context = {'user': user, 'relationships': relationships}
+    return render(request, 'users/followers.html', context)
+
+
+def following(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    relationships = user.following_relationships.all()
+    context = {'user': user, 'relationships': relationships}
+    return render(request, 'users/followers.html', context)

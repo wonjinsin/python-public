@@ -1,5 +1,5 @@
 from django.urls import path
-from posts.views import feeds, post_add, comment_add, comment_delete, tags, post_detail
+from posts.views import feeds, post_add, comment_add, comment_delete, tags, post_detail, post_like
 
 app_name = 'posts'
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
          comment_delete, name='comment_delete'),
     path('tags/<str:tag_name>', tags, name='tags'),
     path('<int:post_id>', post_detail, name='post_detail'),
+    path('<int:post_id>/like', post_like, name='post_like'),
 ]

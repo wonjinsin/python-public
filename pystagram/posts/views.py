@@ -97,3 +97,17 @@ def post_detail(request, post_id):
     commnet_form = CommentForm(),
     context = {"post": post, "comment_form": commnet_form}
     return render(request, 'posts/post_detail.html', context)
+
+
+def post_like(request, post_id):
+    post = Post.objects.get(id=post_id)
+    user = request.user
+
+    if user.like_posts.filter(id=post.id).exists():
+        user.like_posts.remove(post)
+    else:
+        user.like_posts.add(post)
+
+    url_next = request.GET.get('next') or reverse(
+        'posts:feeds') + f'#post-{post.id}'
+    return HttpResponseRedirect(url_next)
